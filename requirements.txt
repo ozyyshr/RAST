@@ -1,0 +1,12 @@
+evaluate==0.4.3
+matplotlib==3.10.1
+nltk==3.9.1
+numpy==2.2.4
+simcse==0.4
+simctg==0.7
+stanza==1.10.1
+submitit==1.5.2
+torch==2.4.0+cu124
+tqdm==4.66.4
+transformers==4.48.3
+vllm==0.6.3
