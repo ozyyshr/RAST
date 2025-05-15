@@ -15,7 +15,6 @@ Instead of directly fine-tuning large models with reinforcement learning (RL), o
 - `modeling/` – Model loading and interface wrappers.
 - `scripts/` – Auxiliary scripts for launching experiments.
 - `simplerl_math_eval/` – Evaluation tools for math reasoning datasets.
-- `vlm/` – Vision-language model tools (if applicable to ablations).
 - `environment.yaml` – Conda environment file for reproducibility.
 - `requirements.txt` – Python package dependencies.
 - `utils.py` – Utility functions used throughout the codebase.
