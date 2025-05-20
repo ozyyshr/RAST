@@ -1,5 +1,13 @@
 # 🧠 Reasoning Activation in LLMs via Small Model Transfer
 
+<p align="center">
+  <a href="https://ozyyshr.github.io/RAST/"><img src="https://img.shields.io/badge/🌐-Website-red" height="25"></a>
+  <a href="https://arxiv.org"><img src="https://img.shields.io/badge/📝-Paper-blue" height="25"></a>
+</p>
+
+🖋 **Authors:** [Siru Ouyang](https://ozyyshr.github.io/), [Xinyu Zhu](https://zhuxinyu.top/), [Zilin Xiao](https://zilin.me/), [Minhao Jiang](https://minhaoj2.github.io/), [Yu Meng](https://yumeng5.github.io/), [Jiawei Han](https://hanj.cs.illinois.edu/)
+
+
 This repository contains the codebase and evaluation pipeline for our paper: **Reasoning Activation in LLMs via Small Model Transfer**. We propose a decoding-time method, **RAST**, that activates reasoning capabilities in large language models by transferring logit-level adjustments from smaller RL-tuned models.
 
 ## 🚀 Method Overview
@@ -63,7 +71,7 @@ python tests/RAST_decode/run.py \
     --num_runs 32
 ```
 
-#### 4. Inference
+### 4. Evaluation
 
 We will using the eval system inside the `simplelr_math_eval` folder.
 
@@ -71,7 +79,7 @@ We will using the eval system inside the `simplelr_math_eval` folder.
 cd simplelr_math_eval
 ```
 
-For example, suppose we have the results in `3` for Olympiad Bench under dir `results/OlympiadBench`, the eval script will be:
+For example, suppose we have the results in `3. run inference` for Olympiad Bench under dir `results/OlympiadBench`, the eval script will be:
 
 ```bash
 python math_eval_pred.py \

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reasoning Activation in LLMs via Small Model Transfer</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/StructChem.jpg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title is-bold">
+            <img src="static/images/StructChem.jpg" style="width:1em;vertical-align: middle" alt="Logo"/> 
+            <span class="mmmu" style="vertical-align: middle">RAST</span>
+            </h1>
+          <h2 class="subtitle is-3 publication-subtitle">
+            Reasoning Activation in LLMs via Small Model Transfer
+          </h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ozyyshr.github.io">Siru Ouyang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://zhuxinyu.top/">Xinyu Zhu</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://zilin.me/">Zilin Xiao</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://minhaoj2.github.io/">Minhao Jiang</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://yumeng5.github.io/">Yu Meng</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://hanj.cs.illinois.edu">Jiawei Han</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Illinois Urbana-Champaign, <sup>2</sup>University of Virginia</span>
+            <span class="author-block"><sup>3</sup>Rice University, <sup>4</sup>GE HealthCare</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ozyyshr/RAST/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="#Examples"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Examples</span>
+                </a>
+              </span>
+              <!-- Twitter Link. -->
+              <!-- <span class="link-block">
+                <a href="https://x.com/MingZhong_/status/1762347881812443575?s=20"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>Twitter</span></a>
+                  </a>
+              </span> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+        <div class="content has-text-justified">
+          <p>This project introduce <strong>RAST</strong>, a simple yet effective inference-time strategy that activates reasoning capabilities in LLMs by transferring logit-level adjustments from smaller RL-tuned models. Our paper begins with a key hypothesis as follows:</p>
+          
+          <p align="center">
+            <img src="./static/images/hypothesis.png" class="center" width="80%">
+            </p>
+            
+          <p>To test our hypothesis, we conduct a preliminary study using base LLM to do next token prediction when given prefix generated by the RL model, we found that there is a large path coverage rate, indicating that only a small set of tokens are different on the decoding path acorss model scales. In particular, the different tokens reflect certain reasoning behaviours, including <strong> (i) branching out</strong>, <strong> (ii) backtracking</strong>, and <strong>(iii) self-verification</strong>. </p>
+          <!-- <br><br><strong>Project Features</strong>: 
+          <ul>
+            <li><strong>🚀 Training-Free Methods</strong>
+              <ul>
+              <li> LoRA Switch and LoRA Composite enable dynamic and precise integration of multiple LoRAs without fine-tuning.</li> 
+              <li> Unlike methods that merge LoRA weights, ours focuses on the decoding process, keeping all LoRA weights intact.</li>
+              </ul>
+            </li> 
+            <li><strong>📊 ComposLoRA Testbed</strong>
+              <ul>
+              <li> A new comprehensive platform, featuring 480 composition sets and 22 pre-trained LoRAs across six categories.</li> 
+              <li> ComposLoRA is designed for the quantitative evaluation of LoRA-based composable image generation tasks.</li>
+              </ul>
+            </li>
+            <li><strong>📝 GPT-4V-based Evaluator</strong>
+              <ul>
+              <li>We propose using GPT-4V as an evaluator to assess the efficacy of compositions and the quality of images.</li>
+              <li>This evaluator has demonstrated a better correlation with human judgments.</li>
+              </ul>
+            </li>
+            <li><strong>🏆 Superior Performance</strong>
+              <ul>
+              <li>Both automated and human evaluations show that our approaches substantially outperform the prevalent LoRA Merge.</li>
+              <li>Our methods exhibit a more significant advantage when generating complex compositions.</li>
+              </ul>
+            </li>
+            <li><strong>🕵️‍♂️ Detailed Analysis</strong>
+              <ul>
+              <li>We delve deeply into the scenarios where each method excels.</li>
+              <li>We explore the potential bias associated with using GPT-4V for evaluation.</li>
+              </ul>
+            </li>
+          </ul>
+         </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline width="80%">
+        <source src="./static/videos/method.m4v"
+                type="video/mp4">
+      </video>
+      <video id="teaser" autoplay muted loop playsinline width="100%">
+        <source src="./static/videos/intro_video_2.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Multi-LoRA composition techniques effectively blend different elements into a cohesive image. Unlike the conventional LoRA Merge approach, which can lead to detail loss and image distortion as more LoRAs are added, our methods retain the accuracy of each element and the overall image quality.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Results. -->
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <h2 class="title is-3">Methodology</h2>
+        <p align="center">
+          <img src="./static/images/method.jpg" class="center" width="80%">
+          </p>
+        <div class="content has-text-justified">
+          <ul>
+            <li><strong>Formulae Generation:</strong>
+              <ul>
+              <li>Formulae serve as organized and abstracted representations of chemistry knowledge. When humans tackle intricate problems, the initial phase often involves seeking relevant knowledge as a foundation.</li> 
+              <li>LLMs have indeed encoded much chemistry knowledge, it is often effective to elicit the knowledge from the parametric storage.</li>
+              <li>We instruct the LLM not only to recite them but also to provide explanations for the variables they contain.</li>
+              </ul>
+            </li>
+            <li><strong>Step-by-step Reasoning:</strong>
+              <ul>
+              <li>Grounded on the generated formulae, the LLMs can then reason about the solution to the original question.</li>
+              <li>To induce LLMs for more precise reasoning and calculation processes, we adopt program-of-thoughts (PoT).</li>
+              </ul>
+            </li>
+
+            <p align="center">
+              <img src="./static/images/instruction_fr.png" class="center" width="80%">
+              </p>
+
+            <li><strong>Confidence-based Review-and-Refinement:</strong>
+              <ul>
+              <li>The generated formulae and step-by-step reasoning are not always error-free. The cumulative errors in the formulae generation or step-by-step reasoning process can amplify and propagate throughout the entire generation, leading to wrong answers.</li>
+              <li> We estimate a confidence score on the revision process. Only a high-confidence revision is accepted for further refinement in the next iteration.</li>
+              </ul>
+              <video id="teaser" autoplay muted loop playsinline width="80%">
+                <source src="./static/videos/method.m4v"
+                        type="video/mp4">
+              </video>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Results. -->
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <h2 class="title is-3">Experimental Results</h2>
+        <p align="center">
+        <img src="./static/images/result.png" class="center" width="80%">
+        </p>
+        <div class="content has-text-justified">
+          <ul>
+            <li>Our proposed method consistently outperforms baseline methods by achieving an average of 30% improvement.</li>
+            <li>StructChem works on both GPT-3,5 and GPT-4. The performance improvement on few-shot setting is even larger.</li>
+            <li>StructChem achieves substantial performance gains in complex problems with extensive reasoning steps.</li>
+          </ul>
+        </div>
+        <p align="center">
+          <img src="./static/images/finetune.png" class="center" width="80%">
+        </p>
+        <div class="content has-text-justified">
+          <ul>
+            <li>Teach smaller open-sourced models how to reason: (1) Chemistry problems generated by GPT-4 as input; (2) Reasoning processes generated by StructChem as output </li>
+            <li>StructChem achieves huge improvement over baselines, which validates the high quality of our generated reasoning process.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Results. -->
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <h2 class="title is-3">Analysis</h2>
+        <p align="center">
+        <img src="./static/images/case_study.png" class="center" width="80%">
+        </p>
+        <div class="content has-text-justified">
+          <ul>
+            <li>Both "structured instruction" and "iterative review and refinement" are significant in contributing to the performance of StructChem for zero-shot and few-shot settings.</li>
+            <li>While iterative refinement indeed contributes to the performance, our strategy of structured instruction is strong enough and demonstrates comparative performance with strong baselines such as CoT.</li>
+          </ul>
+        </div>
+        <p align="center">
+          <img src="./static/images/error_cost.png" class="center" width="80%">
+        </p>
+        <div class="content has-text-justified">
+          <ul>
+            <li>StructChem are more likely to generate irrelevant formulae than inaccurate ones.</li>
+            <li>Formulae being relevant probably is more important than being correct.</li>
+            <li>Complex reasoning ability is still the bottleneck of LLMs.</li>
+            <li>Preciseness is important for solving complex chemistry problems.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-------------------------------------------------------------------- Error Example  -------------------------------------------------------------------->
+<section>
+
+  <!-- <div class="column is-full has-text-centered content">
+    <div id="examples" class="carousel results-carousel">
+      <div class="box m-5">
+        <div class="content has-text-centered">
+          <img src="static/images/example_1.png" alt="statistics 3" width="80%"/>
+          <p> Accuracy distribution of GPT4-V on the knowledge points of SceMQA </p>    
+          </div>
+        </div>
+      <div class="box m-5">
+        <div class="content has-text-centered">
+          <img src="static/images/example_2.png" alt="statistics 2" width="80%"/>
+          <p> Accuracy distribution of Google Gemini on the knowledge points of SceMQA </p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="columns is-centered m-6">
+    <div class="column is-full has-text-centered content">
+      <h2 class="title is-3" id="examples">Examples</h2>
+      <img src="static/images/example.png" alt="error examples" width="80%"/>
+      </div>
+    </div>
+  </div>
+  </div>
+ </section> 
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{ouyang2024structured,
+      title={Structured Chemistry Reasoning with Large Language Models}, 
+      author={Siru Ouyang and Zhuosheng Zhang and Bing Yan and Xuan Liu and Yejin Choi and Jiawei Han and Lianhui Qin},
+      year={2024},
+      eprint={2311.09656},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <div class="content">
+          <p>
+            The source code of this webpage is based on the <a href="https://github.com/nerfies/nerfies.github.io/">
+              Nerfies</a> project webpage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
