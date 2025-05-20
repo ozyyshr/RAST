@@ -34,7 +34,7 @@ Instead of directly fine-tuning large models with reinforcement learning (RL), o
 
 ---
 
-## 🧪 Usage
+## 🔨 Usage
 
 ### 1. Setup Environment
 
