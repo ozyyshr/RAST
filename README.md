@@ -24,7 +24,7 @@ Instead of directly fine-tuning large models with reinforcement learning (RL), o
 
 - `analysis/` – Scripts for result analysis and visualization.
 - `datasets/` – Benchmark datasets used in our experiments.
-- `modeling/` – Model loading and interface wrappers.
+- `modeling/` – Direct implementation using Huggingface (slow but intuitive).
 - `scripts/` – Auxiliary scripts for launching experiments.
 - `simplerl_math_eval/` – Evaluation tools for math reasoning datasets.
 - `environment.yaml` – Conda environment file for reproducibility.
