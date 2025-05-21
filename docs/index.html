@@ -29,7 +29,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/StructChem.jpg">
+  <link rel="icon" href="./static/images/RAST.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -345,19 +345,26 @@
         </p>
         <div class="content has-text-justified">
           <ul>
-            <li>Both "structured instruction" and "iterative review and refinement" are significant in contributing to the performance of StructChem for zero-shot and few-shot settings.</li>
-            <li>While iterative refinement indeed contributes to the performance, our strategy of structured instruction is strong enough and demonstrates comparative performance with strong baselines such as CoT.</li>
+            <li>RAST guides the base model to follow more deliberate reasoning patterns, such as proposing, testing, and verifying solutions, unlike the base which often outputs linear, error-prone steps.</li>
+            <li>This shift is quantitatively supported by high KL divergence on reasoning-specific tokens (e.g., “check”), reflecting effective activation of reasoning behavior.</li>
           </ul>
         </div>
         <p align="center">
-          <img src="./static/images/error_cost.png" class="center" width="80%">
+          <img src="./static/images/analysis_overall.png" class="center" width="80%">
         </p>
         <div class="content has-text-justified">
           <ul>
-            <li>StructChem are more likely to generate irrelevant formulae than inaccurate ones.</li>
-            <li>Formulae being relevant probably is more important than being correct.</li>
-            <li>Complex reasoning ability is still the bottleneck of LLMs.</li>
-            <li>Preciseness is important for solving complex chemistry problems.</li>
+            <li>Cosine similarity between delta logits from different model scales serves as a strong indicator of transferability. Higher similarity correlates with better recovery rates, suggesting more effective reasoning activation.</li>
+            <li>RAST achieves high reasoning performance while significantly reducing GPU memory and hardware requirements—up to 50% savings compared to full-scale RL—demonstrating strong efficiency without sacrificing recovery rates.</li>
+          </ul>
+        </div>
+        <p align="center">
+          <img src="./static/images/parameters.png" class="center" width="80%">
+        </p>
+        <div class="content has-text-justified">
+          <ul>
+            <li>RAST maintains strong performance across a wide range of decoding-time hyperparameters.</li>
+            <li>It is robust to variations in temperature (τ) and weight (λ), eliminating the need for heavy hyperparameter tuning.</li>
           </ul>
         </div>
       </div>
@@ -366,7 +373,7 @@
 </section>
 
 <!-------------------------------------------------------------------- Error Example  -------------------------------------------------------------------->
-<section>
+<!-- <section> -->
 
   <!-- <div class="column is-full has-text-centered content">
     <div id="examples" class="carousel results-carousel">
@@ -386,15 +393,15 @@
   </div> -->
 
 
-  <div class="columns is-centered m-6">
+  <!-- <div class="columns is-centered m-6">
     <div class="column is-full has-text-centered content">
       <h2 class="title is-3" id="examples">Examples</h2>
       <img src="static/images/example.png" alt="error examples" width="80%"/>
       </div>
     </div>
   </div>
-  </div>
- </section> 
+  </div> -->
+ <!-- </section>  -->
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
