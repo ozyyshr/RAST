@@ -263,30 +263,31 @@
     <div class="columns is-centered">
       <div class="column has-text-centered">
         <h2 class="title is-3">Methodology</h2>
-        <p align="center">
-          <img src="./static/images/method.jpg" class="center" width="80%">
-          </p>
         <div class="content has-text-justified">
           <ul>
             <li><strong>Motivation:</strong>
               <ul>
-              <li>Formulae serve as organized and abstracted representations of chemistry knowledge. When humans tackle intricate problems, the initial phase often involves seeking relevant knowledge as a foundation.</li> 
-              <li>LLMs have indeed encoded much chemistry knowledge, it is often effective to elicit the knowledge from the parametric storage.</li>
-              <li>We instruct the LLM not only to recite them but also to provide explanations for the variables they contain.</li>
+              <li>RL boosts reasoning but is <strong>costly</strong> at scale.</li> 
+              <li><strong>Key insight: </strong>RL shifts token distributions to favor reasoning, not add new knowledge.</li>
+              <li><strong>Hypothesis: </strong>These shifts are model-size invariant and can be transferred.</li>
+              <li><strong>Goal: </strong>Use a small RL model’s logits to activate reasoning in a large base model without retraining — enabling efficient reasoning via RAST.</li>
               </ul>
             </li>
+            <p align="center">
+              <img src="./static/images/method.jpg" class="center" width="80%">
+              </p>
             <li><strong>Reasoning Activation through Small RL Models:</strong>
               <ul>
-              <li>Grounded on the generated formulae, the LLMs can then reason about the solution to the original question.</li>
-              <li>To induce LLMs for more precise reasoning and calculation processes, we adopt program-of-thoughts (PoT).</li>
+                <li><strong>Core idea</strong>: Amplify reasoning-relevant tokens (e.g., “<em>instead</em>”) while preserving base predictions for non-reasoning tokens (e.g., “<em>of</em>”).</li>
+                <li><strong>Mechanism</strong>: At each decoding step, apply the logit delta between <code>S<sub>RL</sub></code> and <code>S<sub>base</sub></code> to guide <code>M<sub>base</sub></code>.</li>
               </ul>
             </li>
 
             <p align="center">
-              <img src="./static/images/instruction_fr.png" class="center" width="80%">
+              <img src="./static/images/equation.png" class="center" width="80%">
               </p>
 
-            <li><strong>Confidence-based Review-and-Refinement:</strong>
+            <!-- <li><strong>Confidence-based Review-and-Refinement:</strong>
               <ul>
               <li>The generated formulae and step-by-step reasoning are not always error-free. The cumulative errors in the formulae generation or step-by-step reasoning process can amplify and propagate throughout the entire generation, leading to wrong answers.</li>
               <li> We estimate a confidence score on the revision process. Only a high-confidence revision is accepted for further refinement in the next iteration.</li>
@@ -295,7 +296,7 @@
                 <source src="./static/videos/method.m4v"
                         type="video/mp4">
               </video>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
