@@ -10,7 +10,13 @@
 
 This repository contains the codebase and evaluation pipeline for our paper: **Reasoning Activation in LLMs via Small Model Transfer**. We propose a decoding-time method, **RAST**, that activates reasoning capabilities in large language models by transferring logit-level adjustments from smaller RL-tuned models.
 
-## 🚀 Method Overview
+## 🚀 Overview
+
+Large Language Models (LLMs) tuned with RL are powerful reasoning capabilities. It is increasingly believed that RL does not endow LLMs with fundamentally new knowledge, but to elicit and amplify reasoning behaviours already present within base models. Specifically, we found that RL activates latent reasoning capabilities in LLMs not by globaly altering the entire output distribution, but by selectively adjusting the probabilities of a small subset of tokens that reflect reasoning behaviours.
+
+<p align="center">
+    <img src="assets/intro.jpg" width="100%" alt="intro_case">
+</p>
 
 Instead of directly fine-tuning large models with reinforcement learning (RL), our method applies reasoning corrections derived from small-scale RL-tuned models to the output logits of larger models during inference—yielding reasoning performance gains without retraining.
 
