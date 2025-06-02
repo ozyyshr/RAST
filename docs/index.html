@@ -120,7 +120,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org"
+                <a href="https://github.com/ozyyshr/RAST/assets/paper.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -186,11 +186,28 @@
   </div>
 </section>
 
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">TL;DR</h2>
+          <div class="content has-text-justified">
+            <p>
+              This project introduce <strong>RAST</strong>, a simple yet effective inference-time strategy that activates reasoning capabilities in LLMs by transferring logit-level adjustments from smaller RL-tuned models, without requiring the direct RL tuning on large models.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
         <div class="content has-text-justified">
-          <p>This project introduce <strong>RAST</strong>, a simple yet effective inference-time strategy that activates reasoning capabilities in LLMs by transferring logit-level adjustments from smaller RL-tuned models. Our paper begins with a key hypothesis as follows:</p>
+          <p>Our paper begins with a key hypothesis as follows:</p>
         
           <p align="center">
             <img src="./static/images/hypothesis.png" class="center" width="80%">
@@ -270,7 +287,7 @@
               <li>RL boosts reasoning but is <strong>costly</strong> at scale.</li> 
               <li><strong>Key insight: </strong>RL shifts token distributions to favor reasoning, not add new knowledge.</li>
               <li><strong>Hypothesis: </strong>These shifts are model-size invariant and can be transferred.</li>
-              <li><strong>Goal: </strong>Use a small RL model’s logits to activate reasoning in a large base model without retraining — enabling efficient reasoning via RAST.</li>
+              <li><strong>Goal: </strong>Use a small RL model's logits to activate reasoning in a large base model without retraining — enabling efficient reasoning via RAST.</li>
               </ul>
             </li>
             <p align="center">

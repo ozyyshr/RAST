@@ -99,3 +99,13 @@ python math_eval_pred.py \
 The evaluation mode includes `average`, `pass (pass@k)`, and `majority (majority@k)`.
 
 ## Citation
+
+If you find this work useful, please kindly cite our paper:
+```
+@misc{ouyang2025rast,
+      title={RAST: Reasoning Activation in LLMs via Small Model Transfer}, 
+      author={Siru Ouyang and Xinyu Zhu and Zilin Xiao and Minhao Jiang and Yu Meng and Jiawei Han},
+      year={2025},
+      howpublished = {\url{https://github.com/ozyyshr/RAST}},
+}
+```
