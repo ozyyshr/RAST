@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://ozyyshr.github.io/RAST/"><img src="https://img.shields.io/badge/🌐-Website-red" height="25"></a>
-  <a href="https://github.com/ozyyshr/RAST/blob/main/assets/paper.pdf"><img src="https://img.shields.io/badge/📝-Paper-blue" height="25"></a>
+  <a href="https://arxiv.org/abs/2506.15710"><img src="https://img.shields.io/badge/📝-Paper-blue" height="25"></a>
 </p>
 
 🖋 **Authors:** [Siru Ouyang](https://ozyyshr.github.io/), [Xinyu Zhu](https://zhuxinyu.top/), [Zilin Xiao](https://zilin.me/), [Minhao Jiang](https://minhaoj2.github.io/), [Yu Meng](https://yumeng5.github.io/), [Jiawei Han](https://hanj.cs.illinois.edu/)
